@@ -87,6 +87,8 @@ class Client:
             role_result = self.stack[-1][0].get_role(RoleName=segments[1])
             role = role_result["Role"]
             output = ">> Assumed Role <<\n"
+            output += f"UserId={identity_result['UserId']}\n"
+            output += f"Account={identity_result['Account']}\n"
             output += f"Session: {segments[2]}\n"
             output += f"Role: {role['RoleName']}\n"
 
