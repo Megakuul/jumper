@@ -20,6 +20,7 @@
           bash
           python313
           python313Packages.boto3
+          python313Packages.prompt-toolkit
         ];
 
         installPhase = ''
@@ -30,7 +31,10 @@
             ${pkgs.python313}/bin/python $out/lib/jumper
           EOF
           chmod +x $out/bin/jumper
-          wrapProgram $out/bin/jumper --prefix PATH : ${pkgs.lib.makeBinPath [pkgs.python313Packages.boto3]}
+          wrapProgram $out/bin/jumper --prefix PATH : ${
+            pkgs.lib.makeBinPath
+            [pkgs.python313Packages.boto3 pkgs.python313Packages.prompt-toolkit]
+          }
         '';
 
         meta.mainProgram = "jumper";
@@ -43,6 +47,7 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             python313
+            python313Packages.prompt-toolkit
             python313Packages.boto3
             python313Packages.boto3-stubs
             python313Packages.mypy-boto3-iam
