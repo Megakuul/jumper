@@ -31,8 +31,8 @@
             ${pkgs.python313}/bin/python $out/lib/jumper
           EOF
           chmod +x $out/bin/jumper
-          wrapProgram $out/bin/jumper --prefix PATH : ${
-            pkgs.lib.makeBinPath
+          wrapProgram $out/bin/jumper --prefix PYTHONPATH : ${
+            pkgs.python313Packages.makePythonPath
             [pkgs.python313Packages.boto3 pkgs.python313Packages.prompt-toolkit]
           }
         '';
